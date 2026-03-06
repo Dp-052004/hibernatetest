@@ -9,22 +9,17 @@ import javax.persistence.Persistence;
 import DAO.BookDAO;
 import DAO.BookDAOImpl;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
     public static void main( String[] args )
     {
-    	EntityManagerFactory emf=Persistence.createEntityManagerFactory("Book_Management_System");
-    	EntityManager em=emf.createEntityManager();
-    	BookDAO dao = new BookDAOImpl(em);
-    	
     	Scanner sc = new Scanner(System.in);
 
         while(true)
         {
+        	EntityManagerFactory emf=Persistence.createEntityManagerFactory("Book_Management_System");
+        	EntityManager em=emf.createEntityManager();
+        	BookDAO dao = new BookDAOImpl(em);
             System.out.println("\n1 Add Book");
             System.out.println("2 View Books");
             System.out.println("3 View Books By Title");
@@ -53,10 +48,13 @@ public class App
                 	dao.deleteBookByTitle(); 
                 	break;
                 case 6:
-                    em.close();
+                	em.close();
                     emf.close();
                     System.exit(0);
             }
+            em.close();
+            emf.close();
+            
         }
     }
 }
